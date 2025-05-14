@@ -18,6 +18,7 @@ export class World {
     }
   
     drawGrid(ctx){
+        ctx.strokeStyle = 'black';
         for (let row = 0; row < ROWS; row++){
             for(let col = 0; col < COLS; col++){
                 ctx.strokeRect(

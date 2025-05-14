@@ -1,4 +1,4 @@
-Inside hero.js: 1:01:09 timestamp onto video
+Inside hero.js: 1:19:48 timestamp onto video
 
 super(); means to do the code inside the parent file which is GameObject first, then this one
 the hero class is whats known as a child, which means it takes the code from the parent but adds their own code ontop of that.
