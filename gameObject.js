@@ -13,11 +13,43 @@ export class GameObject {
         this.position = position ?? {x: 0, y: 0};
         this.scale = scale ?? 1;
 
+        this.destinationPosition = {x: this.position.x, y: this.position.y};
+        this.distanceToTravel = {x: 0, y: 0};
+
+    }
+    /* pythagoras sats current position to destination position 
+    c^2 (distance) = a^2 (distance to travel x) + b^2 (distance to travel y) */
+    moveTowards(destinationPosition, speed){
+        this.distanceToTravel.x = destinationPosition.x - this.position.x;
+        this.distanceToTravel.y = destinationPosition.y - this.position.y;
+
+        //let distance = Math.sqrt(this.distanceToTravel.x**2 + this.distanceToTravel.y**2);
+        let distance = Math.hypot(this.distanceToTravel.x, this.distanceToTravel.y);
+
+        if (distance <= speed){
+            // if close enough, snap to position
+            this.position.x = destinationPosition.x;
+            this.position.y = destinationPosition.y;
+        } else {
+            // else take a step towards destination
+            // if x is positive, you move right, if negative, you move left
+            // if y is positive, you move up, if y is negative, you move down
+            const stepX = this.distanceToTravel.x / distance;
+            const stepY = this.distanceToTravel.y / distance;
+            this.position.x += stepX * speed;
+            this.position.y += stepY * speed;
+
+            // remaining distance
+            this.distanceToTravel.x = destinationPosition.x - this.position.x;
+            this.distanceToTravel.y = destinationPosition.y - this.position.y;
+            distance = Math.hypot(this.distanceToTravel.x, this.distanceToTravel.y);
+        }
+        return distance;
     }
     draw(ctx){
         ctx.fillRect(
-            this.position.x * TILE_SIZE,
-            this.position.y * TILE_SIZE,
+            this.position.x,
+            this.position.y,
             TILE_SIZE,
             TILE_SIZE
         )

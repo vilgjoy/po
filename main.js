@@ -19,7 +19,7 @@ window.addEventListener('load', function(){
             this.world = new World();
             this.hero = new Hero({
                 game: this,
-                position: {x: 2, y: 2}
+                position: {x: 1 * TILE_SIZE, y: 2 * TILE_SIZE}
             });
             this.input = new Input();
         }

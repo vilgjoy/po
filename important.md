@@ -1,4 +1,4 @@
-Inside hero.js: 40:14 timestamp onto video
+Inside hero.js: 1:01:09 timestamp onto video
 
 super(); means to do the code inside the parent file which is GameObject first, then this one
 the hero class is whats known as a child, which means it takes the code from the parent but adds their own code ontop of that.
@@ -40,4 +40,14 @@ export class Hero extends GameObject {
         super({position});
     }
 }
+
+when we call moveTowards() method, we pass it where we want to move (destinationPosition) and how fast (speed).
+we calculate the horizontal and vertical position we need to travel (this.distanceToTravel.x, this.distanceToTravel.y)
+
+from there, we recalculate distance between current position and destination position (let distance = Math.hypot(this.distanceToTravel.x, this.distanceToTravel.y);)
+then, if distance is less than speed, you snap to the final position.
+else, calculate the step we need to take and update positon.x and position.y factoring in speed.
+
+then we recalculate the remaining distance and return the distance value.
+
 
